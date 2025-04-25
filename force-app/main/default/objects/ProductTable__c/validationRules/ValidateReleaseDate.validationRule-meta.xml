@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidateReleaseDate</fullName>
+    <active>true</active>
+    <errorConditionFormula>ReleaseDate__c &gt; TODAY()</errorConditionFormula>
+    <errorDisplayField>ReleaseDate__c</errorDisplayField>
+    <errorMessage>Invalid value</errorMessage>
+</ValidationRule>
