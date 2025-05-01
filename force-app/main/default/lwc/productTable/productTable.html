@@ -1,0 +1,46 @@
+<template>
+    <lightning-card title="Table of products">
+        <div style="padding:10px">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" border="1">
+                <thead>
+            <tr class="slds-line-height_reset">
+                <td>
+                    Name
+                </td>
+                <td>
+                    Amount
+                </td>
+                <td>
+                    Price
+                </td>
+                <td>
+                    Product Type
+                </td>
+                <td>
+                    Release Date
+                </td>
+                <td>
+                    Available
+                </td>
+            </tr>
+            </thead>
+            <template for:each={products} for:item="prod">
+                <tr key={prod.Id}  class="slds-hint-parent">
+                    <td>{prod.Name}</td>
+                    <td>{prod.Amount__c}</td>
+                    <td>{prod.Price__c}</td>
+                    <td>{prod.ProductType__c}</td>
+                    <td>{prod.ReleaseDate__c}</td>
+                    <td>{prod.Available__c}</td>
+                    <td class="">
+                        <lightning-button variant="brand" label="Edit" title="Edit" icon-name="utility:download" class="slds-m-left_x-small"></lightning-button>
+                    </td>
+                    <td>
+                        <lightning-button variant="destructive" label="Delete" title="Delete" icon-name="utility:delete" class="slds-m-left_x-small"></lightning-button>
+                    </td>
+                </tr>
+            </template>
+        </table>
+    </div>
+    </lightning-card>
+</template>
