@@ -3,7 +3,7 @@
     <fullName>ProductType__c</fullName>
     <businessStatus>Active</businessStatus>
     <label>ProductType</label>
-    <required>true</required>
+    <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
