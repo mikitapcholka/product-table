@@ -1,0 +1,210 @@
+<template>
+    <lightning-card title="Table of products">
+        <div style="padding:10px">
+            <lightning-button variant="neutral" label="Add New Record" icon-name="utility:add" onclick={showAddWindow} data-id='1'></lightning-button>
+
+            <!-- Table is Here -->
+            <lightning-layout horizontal-align="start" class="slds-m-vertical_small">
+                <lightning-layout-item size="4">
+                    <lightning-input type="search" value={searchTerm} onchange={onSearchTermChange} placeholder="Search Courses..."></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <lightning-spinner class="slds-show slds-is-relative relative-spinner" size="large" lwc:if={isLoading}></lightning-spinner>
+            <table lwc:else class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th for:each={columns} for:item="column" key={column.apiName} data-field={column.apiName} onclick={handleSort}>
+                            <div class="slds-truncate" title={column.label}>
+                                {column.label}
+                                <lightning-icon 
+                                    lwc:if={column.sortIcon} 
+                                    icon-name={column.sortIcon}
+                                    size="x-small"
+                                ></lightning-icon>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr for:each={products} for:item="prod" key={prod.Id}  class="slds-hint-parent">
+                        <th><div class="slds-truncate" title="Name">{prod.Name}</div></th>
+                        <th><div class="slds-truncate" title="Amount">{prod.Amount__c}</div></th>
+                        <th><div class="slds-truncate" title="Price">{prod.Price__c}</div></th>
+                        <th><div class="slds-truncate" title="ProductType">{prod.ProductType__c}</div></th>
+                        <th><div class="slds-truncate" title="ReleaseDate">
+                            <lightning-formatted-date-time 
+                                    value={prod.ReleaseDate__c}
+                                    year="numeric" 
+                                    month="short" 
+                                    day="numeric" 
+                                    hour="2-digit"
+                                    minute="2-digit"
+                                    time-zone-name="short"
+                                ></lightning-formatted-date-time>
+                        </div></th>
+                        <th><div class="slds-truncate" title="Available">
+                            <lightning-input 
+                                type="checkbox" 
+                                checked={prod.Available__c} 
+                                disabled="true"
+                            ></lightning-input>
+                        </div></th>
+                        <td width="10%">
+                            <lightning-button variant="brand_outline" label="Edit"  onclick={showEditWindow} data-id={prod.Id}></lightning-button>&nbsp;&nbsp;
+                            <lightning-button variant="destructive" icon-name="utility:delete" onclick={showDeleteWindow} data-id={prod.Id}></lightning-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <lightning-layout horizontal-align="end"  class="slds-m-vertical_small">
+                <lightning-layout-item size="2">
+                    <lightning-select name="pageSize" value={pageSize} label="Page Size: " options={pageSizeOptions} onchange={handleChangePageSize} variant="label-inline"></lightning-select>
+                </lightning-layout-item>
+                <lightning-layout-item>
+                    <lightning-button-group>
+                        <lightning-button-icon
+                            icon-name="utility:back" 
+                            variant="border-filled"
+                            onclick={toFirstPage}
+                        ></lightning-button-icon>
+
+                        <lightning-button-icon 
+                            icon-name="utility:chevronleft" 
+                            variant="border-filled"
+                            onclick={toPreviousPage}
+                        ></lightning-button-icon>
+
+                        <lightning-input 
+                            variant="label-hidden"
+                            type="number"
+                            value={visiblePageNumber}
+                            onchange={handlePageNumberChange}
+                        ></lightning-input>
+
+                        <lightning-button-icon
+                            icon-name="utility:chevronright" 
+                            variant="border-filled"
+                            onclick={toNextPage}
+                        ></lightning-button-icon>
+
+                        <lightning-button-icon
+                            icon-name="utility:forward" 
+                            variant="border-filled"
+                            onclick={toLastPage}
+                        ></lightning-button-icon>
+                    </lightning-button-group>
+                </lightning-layout-item> 
+            </lightning-layout>
+        </div>
+    </lightning-card>
+    
+
+    <!-- Template to Modal Window of Add -->  
+    <template if:true={isShowAddWindow}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">                            
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Adding a Record</h2>
+                </header>
+                <div class="container slds-modal__content slds-p-around_medium">
+                    <div>
+                        <lightning-input type="text" label="Name" placeholder="Name" value={currentProd.Name} data-field="Name" onchange={handleChangeInput}></lightning-input>
+                    </div>
+                    <div>
+                        <lightning-input type="number" label="Amount" placeholder="Amount" value={currentProd.Amount__c} data-field="Amount__c" onchange={handleChangeInput}></lightning-input>
+                    </div>
+                    <div>
+                        <lightning-input  type="currency" label="Price" placeholder="Price" value={currentProd.Price__c} data-field="Price__c" onchange={handleChangeInput}></lightning-input>
+                    </div>
+                    <div>
+                        <lightning-combobox
+                            name="productType"
+                            label="Product type"
+                            value={currentProd.ProductType__c}
+                            data-field="ProductType__c"
+                            placeholder="Select Product Type"
+                            options={options}
+                            onchange={handleChangeInput} >
+                        </lightning-combobox>
+                    </div>
+                    <div>
+                        <lightning-input type="date" label="Release Date" placeholder="Release Date" value={currentProd.ReleaseDate__c} data-field="ReleaseDate__c" onchange={handleChangeInput}></lightning-input>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="success" label="Add" onclick={addRecord}>Add</lightning-button>&nbsp;
+                    <lightning-button variant="brand_outline" label="Cancel" onclick={hideAddWindow}>Cancel</lightning-button>
+                </footer>
+            
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Template to Edit Window of Edit --> 
+    <template if:true={isShowEditWindow}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"  class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">                            
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Editing a Record</h2>
+                </header>
+                <div class="container slds-modal__content slds-p-around_medium">
+                    <div>
+                        <lightning-input type="text" label="Name" placeholder="Name" value={currentProd.Name} data-field="Name" onchange={handleChangeInput}></lightning-input>
+                    </div>
+                    <div>
+                        <lightning-input type="number" label="Amount" placeholder="Amount" value={currentProd.Amount__c} data-field="Amount__c" onchange={handleChangeInput}></lightning-input>
+                    </div>
+                    <div>
+                        <lightning-input  type="currency" label="Price" placeholder="Price" value={currentProd.Price__c} data-field="Price__c" onchange={handleChangeInput}></lightning-input>
+                    </div>
+                    <div>
+                        <lightning-combobox
+                            name="productType"
+                            label="Product type"
+                            value={currentProd.ProductType__c}
+                            data-field="ProductType__c"
+                            placeholder="Select Product Type"
+                            options={options}
+                            onchange={handleChangeInput} >
+                        </lightning-combobox>
+                    </div>
+                    <div>
+                        <lightning-input type="date" label="Release Date" placeholder="Release Date" value={currentProd.ReleaseDate__c} data-field="ReleaseDate__c" onchange={handleChangeInput}></lightning-input>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="brand" label="Edit" onclick={editRecord}></lightning-button>&nbsp;
+                    <lightning-button variant="brand_outline" label="Cancel" onclick={hideEditWindow}></lightning-button>
+                </footer>
+            
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Template to Modal Window of Delete --> 
+    <template if:true={isShowDeleteWindow}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"  class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">                            
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Delete a Record?</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p>Are you sure you want to delete record about this product?</p>
+                    <lightning-formatted-text type="text" label="Name" placeholder="Name" value={currentProd.Name} data-field="Name"></lightning-formatted-text>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="destructive" label="Delete" onclick={deleteRecord}></lightning-button>&nbsp;
+                    <lightning-button variant="brand_outline" label="Cancel" onclick={hideDeleteWindow}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    
+
+    
+</template>
