@@ -9,14 +9,6 @@
 		<name>ApexTrigger</name>
 	</types>
 	<types>
-		<members>DataCloudGeoLocation</members>
-		<name>CleanDataService</name>
-	</types>
-	<types>
-		<members>Internal Zone</members>
-		<name>Community</name>
-	</types>
-	<types>
 		<members>pm_logo</members>
 		<name>ContentAsset</name>
 	</types>
@@ -34,60 +26,16 @@
 		<name>CustomField</name>
 	</types>
 	<types>
-		<members>CustomLabels</members>
-		<name>CustomLabels</name>
-	</types>
-	<types>
-		<members>enablement_coaching_feedback_ready</members>
-		<name>CustomNotificationType</name>
-	</types>
-	<types>
 		<members>ProductTable__c</members>
 		<name>CustomObject</name>
-	</types>
-	<types>
-		<members>ProductTable__c-en_US</members>
-		<name>CustomObjectTranslation</name>
 	</types>
 	<types>
 		<members>ProductTable__c</members>
 		<name>CustomTab</name>
 	</types>
 	<types>
-		<members>Enablement_sfdcSESv60/</members>
-		<members>Enablement_sfdcSESv60/Program_Dashboard_sfdcSESv60</members>
-		<members>Enablement_sfdcSESv61/</members>
-		<members>Enablement_sfdcSESv61/Program_Dashboard_sfdcSESv61</members>
-		<name>Dashboard</name>
-	</types>
-	<types>
-		<members>enablement/sfdcEnablement_EnablementWorkspace.sfdc_cms__languageSettings/languages</members>
-		<name>DigitalExperience</name>
-	</types>
-	<types>
-		<members>enablement/sfdcEnablement_EnablementWorkspace</members>
-		<name>DigitalExperienceBundle</name>
-	</types>
-	<types>
-		<members>Account.Standard_Account_Duplicate_Rule</members>
-		<members>Contact.Standard_Contact_Duplicate_Rule</members>
-		<members>Lead.Standard_Lead_Duplicate_Rule</members>
-		<name>DuplicateRule</name>
-	</types>
-	<types>
-		<members>standard case</members>
-		<name>EntitlementProcess</name>
-	</types>
-	<types>
-		<members>Case.Standard</members>
-		<name>EscalationRule</name>
-	</types>
-	<types>
-		<members>Case</members>
-		<name>EscalationRules</name>
-	</types>
-	<types>
 		<members>Home_Page_Products</members>
+		<members>Product_Management_UtilityBar</members>
 		<name>FlexiPage</name>
 	</types>
 	<types>
@@ -95,15 +43,11 @@
 		<name>GlobalValueSet</name>
 	</types>
 	<types>
-		<members>IframeWhiteListUrlSettings</members>
-		<name>IframeWhiteListUrlSettings</name>
-	</types>
-	<types>
 		<members>ProductTable__c-Product Table Layout</members>
 		<name>Layout</name>
 	</types>
 	<types>
-		<members>productTable</members>
+		<members>*</members>
 		<name>LightningComponentBundle</name>
 	</types>
 	<types>
@@ -111,85 +55,8 @@
 		<name>ListView</name>
 	</types>
 	<types>
-		<members>cms_document</members>
-		<members>cms_image</members>
-		<members>news</members>
-		<name>ManagedContentType</name>
-	</types>
-	<types>
-		<members>Account.Standard_Account_Match_Rule_v1_0</members>
-		<members>Contact.Standard_Contact_Match_Rule_v1_1</members>
-		<members>Lead.Standard_Lead_Match_Rule_v1_0</members>
-		<name>MatchingRule</name>
-	</types>
-	<types>
-		<members>Account</members>
-		<members>Address</members>
-		<members>Contact</members>
-		<members>Individual</members>
-		<members>Lead</members>
-		<name>MatchingRules</name>
-	</types>
-	<types>
-		<members>Close Case</members>
-		<members>Escalate Case</members>
-		<members>First Response to Customer</members>
-		<name>MilestoneType</name>
-	</types>
-	<types>
-		<members>NotificationTypeConfig</members>
-		<name>NotificationTypeConfig</name>
-	</types>
-	<types>
-		<members>*</members>
+		<members>Product_Manager</members>
 		<name>PermissionSet</name>
-	</types>
-	<types>
-		<members>force__AgentforceServiceAgentUserPsg</members>
-		<members>force__Commerce_Shopper</members>
-		<members>force__CopilotSalesforceAdminPSG</members>
-		<members>force__CopilotSalesforceUserPSG</members>
-		<members>force__Enablement_Admin</members>
-		<members>force__Enablement_Resources_Manager</members>
-		<members>force__Enablement_User</members>
-		<members>force__Partner_Enablement_User</members>
-		<members>force__SubscriptionManagementBillingAdmin</members>
-		<members>force__SubscriptionManagementBillingOperations</members>
-		<members>force__SubscriptionManagementBuyerIntegrationUser</members>
-		<members>force__SubscriptionManagementCollections</members>
-		<members>force__SubscriptionManagementCreditMemoAdjustmentsOperations</members>
-		<members>force__SubscriptionManagementPaymentAdministrator</members>
-		<members>force__SubscriptionManagementPaymentOperations</members>
-		<members>force__SubscriptionManagementProductAndPricingAdmin</members>
-		<members>force__SubscriptionManagementSalesOperationsRep</members>
-		<members>force__SubscriptionManagementSalesRep</members>
-		<members>force__SubscriptionManagementTaxAdmin</members>
-		<name>PermissionSetGroup</name>
-	</types>
-	<types>
-		<members>default_presence_config</members>
-		<name>PresenceUserConfig</name>
-	</types>
-	<types>
-		<members>Metric.Completion</members>
-		<members>Metric.Progress</members>
-		<name>RecordType</name>
-	</types>
-	<types>
-		<members>ApexDevNet</members>
-		<name>RemoteSiteSetting</name>
-	</types>
-	<types>
-		<members>sfdc_livemessage</members>
-		<members>sfdc_phone</members>
-		<name>ServiceChannel</name>
-	</types>
-	<types>
-		<members>Apex</members>
-		<members>ConnectedApp</members>
-		<members>Picklist</members>
-		<members>Product</members>
-		<name>Settings</name>
 	</types>
 	<types>
 		<members>ProductTable__c</members>
@@ -200,29 +67,10 @@
 		<name>TopicsForObjects</name>
 	</types>
 	<types>
-		<members>en_US</members>
-		<name>Translations</name>
-	</types>
-	<types>
 		<members>ProductTable__c.ValidateAmount</members>
 		<members>ProductTable__c.ValidatePrice</members>
 		<members>ProductTable__c.ValidateReleaseDate</members>
 		<name>ValidationRule</name>
-	</types>
-	<types>
-		<members>Account.Billing</members>
-		<members>Campaign.ViewCampaignInfluenceReport</members>
-		<members>Case.UpsellCrosssellOpportunity</members>
-		<members>Opportunity.DeliveryStatus</members>
-		<name>WebLink</name>
-	</types>
-	<types>
-		<members>Case</members>
-		<name>Workflow</name>
-	</types>
-	<types>
-		<members>Case.ChangePriorityToHigh</members>
-		<name>WorkflowFieldUpdate</name>
 	</types>
 	<version>63.0</version>
 </Package>
